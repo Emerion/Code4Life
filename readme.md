@@ -6,7 +6,7 @@ Don't be surprised or deterred if it takes you longer than usual to have your fi
 it's totally normal! You can view this first part as solving a medium puzzle. 
 Then, it's a classic multiplayer league based game.
 
-* --> [Code4Life Challenge on CodinGame](https://www.codingame.com/ide/challenge/code4life)
+* --> [Code4Life Challenge on CodinGame](https://www.codingame.com/contests/code4life)
 * --> [Code4Life Source on Github](https://github.com/CodinGame/Code4Life)
 
 ##### The Goal
