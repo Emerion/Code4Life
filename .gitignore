@@ -1,0 +1,14 @@
+# JetBrains IDE project files
+.idea
+
+# Jira plugin
+atlassian-ide-plugin.xml
+
+.DS_Store
+test.php
+
+# MacOS defaults
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*
