@@ -45,13 +45,22 @@ class ActionHandler
         $player = $state->players[0];
 
         if (!$this->hasSampleFile($player)) {
+            if ($player->location !== GotoAction::MODULE_SAMPLES) {
+                return new GotoAction(GotoAction::MODULE_SAMPLES);
+            }
+
+            // @todo just get a rank2 sample for now
+            // do some rating based on cost & gain to pick a better one later
+            return new ConnectAction($this->getDownloadSampleRank());
+        }
+
+        $sample = $this->getCurrentSample($player);
+        if (!$sample->isDiagnosed()) {
             if ($player->location !== GotoAction::MODULE_DIAGNOSIS) {
                 return new GotoAction(GotoAction::MODULE_DIAGNOSIS);
             }
 
-            // @todo just get the first sample for now
-            // do some rating based on cost & gain to pick a better one later
-            return new ConnectAction($this->getSampleToDownload($state));
+            return new ConnectAction($sample->id);
         }
 
         if (!$this->hasRequiredMolecules($player)) {
@@ -80,19 +89,11 @@ class ActionHandler
     }
 
     /**
-     * @param GameState $state
-     *
      * @return int
      */
-    private function getSampleToDownload($state)
+    private function getDownloadSampleRank()
     {
-        foreach ($state->samples as $sample) {
-            if ($sample->carriedBy == Sample::CARRY_FLAG_CLOUD) {
-                return $sample->id;
-            }
-        }
-
-        throw new \InvalidArgumentException('No sample found.. What now?!');
+        return Sample::RANK_2;
     }
 
     /**

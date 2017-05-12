@@ -7,6 +7,10 @@ class Sample
     const CARRY_FLAG_OTHER_ROBOT = 1;
     const CARRY_FLAG_CLOUD       = -1;
 
+    const RANK_1 = 1;
+    const RANK_2 = 2;
+    const RANK_3 = 3;
+
     /**
      * unique id of the sample
      *
@@ -48,5 +52,10 @@ class Sample
      * @var int[]
      */
     public $cost = [];
+
+    public function isDiagnosed()
+    {
+        return reset($this->cost) > -1;
+    }
 }
 
