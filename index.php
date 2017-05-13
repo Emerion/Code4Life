@@ -1,7 +1,7 @@
 <?php
 
-$inputReader = new InputReader();
-$inputReader->readInitialConfig();
+$inputReader   = new InputReader();
+$initialConfig = $inputReader->readInitialConfig();
 
 $entityFactory = new StateFactory();
 $actionHandler = new ActionHandler();
@@ -9,10 +9,10 @@ $actionHandler = new ActionHandler();
 try {
     while (true) {
         $config = $inputReader->readTurnConfig();
-        $state  = $entityFactory->convertConfig($config);
+        $state  = $entityFactory->convertConfig($initialConfig, $config);
 
-        // @todo simulate different actions and execute the most valuable one
-        $actionHandler->executeAction($state);
+        $action = $actionHandler->getAction($state);
+        $action->execute();
     }
 } catch (\Exception $e) {
     fwrite(STDERR, 'Error:' . $e->getMessage());

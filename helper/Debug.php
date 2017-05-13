@@ -5,5 +5,5 @@
  */
 function debug($val)
 {
-    fwrite(STDERR, $val . PHP_EOL);
+    fwrite(STDERR, var_export($val, true) . PHP_EOL);
 }

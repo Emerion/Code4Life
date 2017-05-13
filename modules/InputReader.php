@@ -2,14 +2,28 @@
 
 class InputReader
 {
+    /**
+     * Read the initial config from <STDIN> and return in array format.
+     *
+     * @return array[]
+     */
     public function readInitialConfig()
     {
-        // always 0 for now, ignore until in higher leagues
+        $initialConfig = [];
 
         fscanf(STDIN, '%d', $projectCount);
         for ($i = 0; $i < $projectCount; $i++) {
             fscanf(STDIN, '%d %d %d %d %d', $a, $b, $c, $d, $e);
+            $initialConfig['scienceProjects'][] = [
+                Molecule::TYPE_A => $a,
+                Molecule::TYPE_B => $b,
+                Molecule::TYPE_C => $c,
+                Molecule::TYPE_D => $d,
+                Molecule::TYPE_E => $e,
+            ];
         }
+
+        return $initialConfig;
     }
 
     /**

@@ -18,13 +18,17 @@ class GameState
     public $samples = [];
 
     /**
-     * Perform a deep clone of all nested objects when cloning.
-     * This is needed because calculation of different scenarios should not alter other states.
-     *
-     * @return GameState
+     * @var ScienceProject[]
      */
-    public function __clone()
+    public $scienceProjects = [];
+
+    /**
+     * @param string $molecule
+     *
+     * @return bool
+     */
+    public function hasMolecule($molecule)
     {
-        return json_decode(json_encode($this));
+        return $this->availableMolecules[$molecule] >= 1;
     }
 }

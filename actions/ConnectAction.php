@@ -23,6 +23,6 @@ class ConnectAction implements ActionInterface
      */
     public function execute()
     {
-        echo 'CONNECT ' . $this->identifier . PHP_EOL;
+        echo 'CONNECT ' . $this->identifier . ' Just a little more.. ' . PHP_EOL;
     }
 }

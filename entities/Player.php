@@ -2,12 +2,12 @@
 
 class Player
 {
+    const MAX_STORAGE_SIZE     = 10;
+    const MAX_SAMPLE_CARRY_NUM = 3;
 
     /**
-     * @todo rename back to target?
-     * called "target" before.
-     * renamed to location as long as moving does not need time (see eta)
      * module where the player is
+     *
      * @var string
      */
     public $location;
@@ -47,5 +47,67 @@ class Player
      * @var Sample[]
      */
     public $samples = [];
+
+    /**
+     * @return Sample[]
+     */
+    public function getDiagnosedSamples()
+    {
+        $diagnosed = [];
+        foreach ($this->samples as $sample) {
+            if ($sample->isDiagnosed()) {
+                $diagnosed[] = $sample;
+            }
+        }
+
+        return $diagnosed;
+    }
+
+    /**
+     * @param bool $includeUndiagnosed
+     *
+     * @return int
+     */
+    public function getSampleCount($includeUndiagnosed = false)
+    {
+        $count = 0;
+        foreach ($this->samples as $sample) {
+            if ($sample->isDiagnosed() || $includeUndiagnosed) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return null|Sample
+     */
+    public function getUndiagnosedSample()
+    {
+        foreach ($this->samples as $sample) {
+            if (!$sample->isDiagnosed()) {
+                return $sample;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param int[] $cost
+     *
+     * @return bool
+     */
+    public function hasRequiredMolecules($cost)
+    {
+        foreach ($cost as $molecule => $value) {
+            if ($this->storage[$molecule] < $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }

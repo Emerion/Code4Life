@@ -64,5 +64,20 @@ class Sample
     {
         return reset($this->cost) > self::COST_NOT_DIAGNOSED;
     }
+
+    /**
+     * @param int[] $expertise
+     */
+    public function reduceCostsByExpertise($expertise)
+    {
+        foreach ($expertise as $molecule => $value) {
+            if (!$this->isDiagnosed()) {
+                continue;
+            }
+
+            $this->cost[$molecule] = max(0, ($this->cost[$molecule] - $value));
+        }
+    }
+
 }
 
