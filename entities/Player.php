@@ -110,4 +110,12 @@ class Player
         return true;
     }
 
+    /**
+     * @return int
+     */
+    public function getStorageUsage()
+    {
+        return array_sum($this->storage);
+    }
+
 }
