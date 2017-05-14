@@ -9,7 +9,7 @@ class InputReader
      */
     public function readInitialConfig()
     {
-        $initialConfig = [];
+        $initialConfig = ['scienceProjects' => []];
 
         fscanf(STDIN, '%d', $projectCount);
         for ($i = 0; $i < $projectCount; $i++) {

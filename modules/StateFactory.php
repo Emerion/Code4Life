@@ -92,12 +92,16 @@ class StateFactory
         $samples = [];
 
         foreach ($config['samples'] as $sampleConfig) {
+            $sampleConfig['cost'] = array_map(function ($val) {
+                return ($val === 'NULL' || $val === null) ? -1 : (int)$val;
+            }, $sampleConfig['cost']);
+
             $sample                = new Sample();
-            $sample->id            = $sampleConfig['id'];
-            $sample->carriedBy     = $sampleConfig['carriedBy'];
-            $sample->rank          = $sampleConfig['rank'];
-            $sample->expertiseGain = $sampleConfig['expertiseGain'];
-            $sample->health        = $sampleConfig['health'];
+            $sample->id            = (int)$sampleConfig['id'];
+            $sample->carriedBy     = (int)$sampleConfig['carriedBy'];
+            $sample->rank          = (int)$sampleConfig['rank'];
+            $sample->expertiseGain = (int)$sampleConfig['expertiseGain'];
+            $sample->health        = (int)$sampleConfig['health'];
             $sample->cost          = $sampleConfig['cost'];
 
             $samples[] = $sample;
@@ -135,7 +139,7 @@ class StateFactory
             $this->sampleRanks[$sample->id] = $sample->rank;
         }
 
-        $sample->rank = $this->sampleRanks[$sample->id];
+        $sample->rank = isset($this->sampleRanks[$sample->id]) ? $this->sampleRanks[$sample->id] : 0;
     }
 
     /**

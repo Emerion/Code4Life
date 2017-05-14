@@ -12,3 +12,7 @@ test.php
 .AppleDouble
 .LSOverride
 ._*
+
+# generated build files
+out
+logs
